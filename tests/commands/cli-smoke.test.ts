@@ -200,6 +200,37 @@ describe('CLI smoke tests', () => {
     expect(result.stdout).toContain('not found');
   });
 
+  it('status --json outputs valid JSON', async () => {
+    await runCli(['init', '-y'], tempDir);
+    await runCli(['add-json', 'srv', '{"command":"echo"}'], tempDir);
+    const result = await runCli(['status', '--json'], tempDir);
+    expectSuccess(result);
+    const json = JSON.parse(result.stdout);
+    expect(json.servers).toHaveLength(1);
+    expect(json.servers[0].name).toBe('srv');
+    expect(json.servers[0].enabled).toBe(true);
+    expect(json.summary.enabled).toBe(1);
+  });
+
+  it('list --json outputs valid JSON', async () => {
+    await runCli(['init', '-y'], tempDir);
+    await runCli(['add-json', 'srv', '{"command":"echo"}'], tempDir);
+    const result = await runCli(['list', '--json'], tempDir);
+    expectSuccess(result);
+    const json = JSON.parse(result.stdout);
+    expect(json.srv).toBeDefined();
+    expect(json.srv.command).toBe('echo');
+  });
+
+  it('validate --json outputs valid JSON', async () => {
+    await runCli(['init', '-y'], tempDir);
+    const result = await runCli(['validate', '--json'], tempDir);
+    expectSuccess(result);
+    const json = JSON.parse(result.stdout);
+    expect(json.valid).toBe(true);
+    expect(json.errors).toEqual([]);
+  });
+
   it('full workflow: init → add → list → disable → enable → export → remove', async () => {
     let r = await runCli(['init', '-y'], tempDir);
     expect(r.exitCode).toBe(0);

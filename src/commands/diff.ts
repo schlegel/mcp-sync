@@ -13,7 +13,8 @@ export function registerDiff(program: Command): void {
     .command('diff')
     .description('Show diff between .owl07.json and client configs')
     .option('--client <client>', 'Diff against specific client only')
-    .action(async (opts: { client?: string }) => {
+    .option('--json', 'Output as JSON')
+    .action(async (opts: { client?: string; json?: boolean }) => {
       const config = await loadProjectConfig();
       if (!config) throw new ConfigNotFoundError(process.cwd());
 
@@ -28,6 +29,7 @@ export function registerDiff(program: Command): void {
       const clients = opts.client ? [opts.client as ClientId] : ALL_CLIENTS;
 
       let totalDiffs = 0;
+      const jsonClients: Array<{ clientId: string; displayName: string; configPath: string; diffs: Array<{ server: string; status: string }>; count: number }> = [];
 
       for (const clientId of clients) {
         const adapter = getAdapter(clientId);
@@ -40,50 +42,59 @@ export function registerDiff(program: Command): void {
           existing = null;
         }
 
-        console.log();
-        console.log(`  ${c.bold(displayName)} ${c.dim(adapter.getConfigPath())}`);
-        console.log(`  ${divider(45)}`);
+        const diffs: Array<{ server: string; status: string }> = [];
 
         if (!existing) {
-          console.log(`  ${c.dim('No config file found')}`);
-          if (Object.keys(resolved).length > 0) {
-            for (const name of Object.keys(resolved)) {
-              console.log(`  ${c.success('+ ' + name)} ${c.dim('(will be added)')}`);
-              totalDiffs++;
-            }
+          for (const name of Object.keys(resolved)) {
+            diffs.push({ server: name, status: 'added' });
           }
-          continue;
-        }
+        } else {
+          const allNames = new Set([...Object.keys(resolved), ...Object.keys(existing)]);
+          for (const name of [...allNames].sort()) {
+            const inOwl = name in resolved;
+            const inClient = name in existing;
 
-        const allNames = new Set([...Object.keys(resolved), ...Object.keys(existing)]);
-        let clientDiffs = 0;
-
-        for (const name of [...allNames].sort()) {
-          const inOwl = name in resolved;
-          const inClient = name in existing;
-
-          if (inOwl && !inClient) {
-            console.log(`  ${c.success('+ ' + name)} ${c.dim('(will be added)')}`);
-            clientDiffs++;
-          } else if (!inOwl && inClient) {
-            console.log(`  ${c.muted('  ' + name)} ${c.dim('(client-only, untouched)')}`);
-          } else if (inOwl && inClient) {
-            const owl07Json = JSON.stringify(resolved[name]);
-            const clientJson = JSON.stringify(existing[name]);
-            if (owl07Json === clientJson) {
-              console.log(`  ${c.dim('  ' + name)} ${c.success('\u2713 in sync')}`);
-            } else {
-              console.log(`  ${c.warning('~ ' + name)} ${c.dim('(will be updated)')}`);
-              clientDiffs++;
+            if (inOwl && !inClient) {
+              diffs.push({ server: name, status: 'added' });
+            } else if (!inOwl && inClient) {
+              diffs.push({ server: name, status: 'client-only' });
+            } else if (inOwl && inClient) {
+              const owl07Json = JSON.stringify(resolved[name]);
+              const clientJson = JSON.stringify(existing[name]);
+              diffs.push({ server: name, status: owl07Json === clientJson ? 'in-sync' : 'updated' });
             }
           }
         }
 
-        if (clientDiffs === 0) {
-          console.log(`  ${c.success('\u2713 All in sync')}`);
-        }
+        const count = diffs.filter((d) => d.status === 'added' || d.status === 'updated').length;
+        totalDiffs += count;
+        jsonClients.push({ clientId, displayName, configPath: adapter.getConfigPath(), diffs, count });
 
-        totalDiffs += clientDiffs;
+        if (!opts.json) {
+          console.log();
+          console.log(`  ${c.bold(displayName)} ${c.dim(adapter.getConfigPath())}`);
+          console.log(`  ${divider(45)}`);
+
+          if (!existing) {
+            console.log(`  ${c.dim('No config file found')}`);
+            for (const d of diffs) {
+              console.log(`  ${c.success('+ ' + d.server)} ${c.dim('(will be added)')}`);
+            }
+          } else {
+            for (const d of diffs) {
+              if (d.status === 'added') console.log(`  ${c.success('+ ' + d.server)} ${c.dim('(will be added)')}`);
+              else if (d.status === 'client-only') console.log(`  ${c.muted('  ' + d.server)} ${c.dim('(client-only, untouched)')}`);
+              else if (d.status === 'in-sync') console.log(`  ${c.dim('  ' + d.server)} ${c.success('\u2713 in sync')}`);
+              else if (d.status === 'updated') console.log(`  ${c.warning('~ ' + d.server)} ${c.dim('(will be updated)')}`);
+            }
+            if (count === 0) console.log(`  ${c.success('\u2713 All in sync')}`);
+          }
+        }
+      }
+
+      if (opts.json) {
+        console.log(JSON.stringify({ clients: jsonClients, summary: { totalDiffs } }, null, 2));
+        return;
       }
 
       console.log();

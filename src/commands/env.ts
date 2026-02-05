@@ -19,9 +19,20 @@ export function registerEnv(program: Command): void {
   program
     .command('env')
     .description('Audit environment variables referenced in config')
-    .action(async () => {
+    .option('--json', 'Output as JSON')
+    .action(async (opts: { json?: boolean }) => {
       const config = await loadMergedConfig();
       const envVars = extractEnvVars(config.mcpServers as Record<string, unknown>);
+
+      if (opts.json) {
+        const variables = envVars.map((name) => {
+          const value = process.env[name];
+          return { name, set: !!value, masked: value ? (value.length > 8 ? value.slice(0, 4) + '****' + value.slice(-4) : '****') : null };
+        });
+        const found = variables.filter((v) => v.set).length;
+        console.log(JSON.stringify({ variables, summary: { found, missing: variables.length - found } }, null, 2));
+        return;
+      }
 
       if (envVars.length === 0) {
         log.dim('No environment variables referenced in config.');

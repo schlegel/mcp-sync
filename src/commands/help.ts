@@ -44,6 +44,7 @@ function buildHelp(): string {
     cmd('env', 'Audit environment variables in config'),
     cmd('diff', 'Show diff between config and clients'),
     cmd('export', 'Export resolved config as JSON'),
+    `  ${dim('  All view commands support')} ${green('--json')} ${dim('for machine-readable output')}`,
     '',
     section('Sync & Health'),
     cmd('sync', 'Push config to Claude Desktop / Cursor / Claude Code'),

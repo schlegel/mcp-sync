@@ -7,9 +7,20 @@ export function registerStatus(program: Command): void {
   program
     .command('status')
     .description('Quick status overview of configured servers')
-    .action(async () => {
+    .option('--json', 'Output as JSON')
+    .action(async (opts: { json?: boolean }) => {
       const config = await loadMergedConfig();
       const servers = Object.entries(config.mcpServers);
+      const enabled = servers.filter(([, s]) => !s.disabled).length;
+      const disabled = servers.length - enabled;
+
+      if (opts.json) {
+        console.log(JSON.stringify({
+          servers: servers.map(([name, s]) => ({ name, enabled: !s.disabled })),
+          summary: { enabled, disabled, syncTargets: config.sync?.clients ?? [] },
+        }, null, 2));
+        return;
+      }
 
       if (servers.length === 0) {
         log.dim('No servers configured.');
@@ -23,9 +34,6 @@ export function registerStatus(program: Command): void {
         console.log(`  ${dot} ${c.white(name)} ${c.muted(sym.arrow)} ${state}`);
       }
       console.log();
-
-      const enabled = servers.filter(([, s]) => !s.disabled).length;
-      const disabled = servers.length - enabled;
 
       log.dim(`${enabled} enabled, ${disabled} disabled`);
       log.dim(`Sync targets: ${(config.sync?.clients ?? []).join(', ')}`);
