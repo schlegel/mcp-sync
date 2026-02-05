@@ -126,6 +126,29 @@ Variables stay as templates in `.mcpx.json` and are resolved at sync time -- mak
 | `mcpx sync --dry` | Preview sync without writing files |
 | `mcpx doctor` | Health check all servers + system deps |
 | `mcpx import` | Import from existing client configs |
+| `mcpx use <template>` | Apply preset template (web, python, fullstack, devops, data, minimal) |
+| `mcpx env` | Audit environment variables referenced in config |
+| `mcpx diff` | Show diff between `.mcpx.json` and client configs |
+| `mcpx enable <name>` | Enable a disabled server |
+| `mcpx disable <name>` | Disable a server without removing it |
+| `mcpx export` | Export resolved config as JSON (pipe-friendly) |
+
+---
+
+## Templates
+
+Get started fast with prebuilt server bundles:
+
+```bash
+npx mcpx use web        # filesystem + GitHub + Puppeteer
+npx mcpx use python     # filesystem + GitHub + memory
+npx mcpx use fullstack  # filesystem + GitHub + Postgres + Puppeteer + memory
+npx mcpx use devops     # filesystem + GitHub + Docker
+npx mcpx use data       # filesystem + Postgres + SQLite + memory
+npx mcpx use minimal    # filesystem + memory
+```
+
+Templates merge into your existing config -- they never overwrite servers you already have.
 
 ---
 
