@@ -4,3 +4,7 @@ dist/
 .env
 .env.local
 *.mcpx-backup
+*.owl07-backup
+.owl07.json
+.mcp.json
+.claude/

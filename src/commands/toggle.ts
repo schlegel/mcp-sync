@@ -22,8 +22,14 @@ export function registerEnable(program: Command): void {
         return;
       }
 
-      config.mcpServers[name] = { ...config.mcpServers[name], disabled: false };
-      await saveProjectConfig(config);
+      const updated = {
+        ...config,
+        mcpServers: {
+          ...config.mcpServers,
+          [name]: { ...config.mcpServers[name], disabled: false },
+        },
+      };
+      await saveProjectConfig(updated);
 
       console.log();
       log.success(`Enabled ${c.bold(c.white(name))}`);
@@ -50,8 +56,14 @@ export function registerDisable(program: Command): void {
         return;
       }
 
-      config.mcpServers[name] = { ...config.mcpServers[name], disabled: true };
-      await saveProjectConfig(config);
+      const updated = {
+        ...config,
+        mcpServers: {
+          ...config.mcpServers,
+          [name]: { ...config.mcpServers[name], disabled: true },
+        },
+      };
+      await saveProjectConfig(updated);
 
       console.log();
       log.success(`Disabled ${c.bold(c.muted(name))}`);

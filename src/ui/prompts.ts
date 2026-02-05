@@ -37,7 +37,7 @@ export async function promptEnvVars(): Promise<Record<string, string>> {
 
   while (addMore) {
     addMore = await confirm({
-      message: env.length === 0 ? 'Add environment variables?' : 'Add another env var?',
+      message: Object.keys(env).length === 0 ? 'Add environment variables?' : 'Add another env var?',
       default: false,
     });
 

@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import { registerCommands } from '../commands/index.js';
-import { displayBanner } from '../ui/banner.js';
+import { displayBannerAnimated } from '../ui/banner.js';
 import { handleError } from '../utils/errors.js';
 import { VERSION, DESCRIPTION } from '../core/constants.js';
 
@@ -12,8 +12,8 @@ program
   .name('owl07')
   .description(DESCRIPTION)
   .version(VERSION)
-  .hook('preAction', () => {
-    displayBanner();
+  .hook('preAction', async () => {
+    await displayBannerAnimated();
   });
 
 registerCommands(program);

@@ -70,9 +70,7 @@ export async function spawnAndPing(
             };
             child.stdin?.write(JSON.stringify(ping) + '\n');
 
-            if (msg.id === 1) {
-              finish({ success: true, serverInfo: serverInfo ?? undefined });
-            }
+            finish({ success: true, serverInfo: serverInfo ?? undefined });
           }
 
           if (msg.id === 2) {

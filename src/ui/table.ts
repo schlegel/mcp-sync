@@ -25,7 +25,6 @@ export function renderTable(columns: Column[], rows: Record<string, string>[]): 
     columns
       .map((col, i) => {
         const val = row[col.key] || '';
-        const colored = col.color ? col.color(val) : val;
         const padded = val.padEnd(widths[i]);
         return col.color ? col.color(padded) : padded;
       })
