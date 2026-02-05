@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "mcpx Configuration",
-  "description": "Configuration file for mcpx - Project-first MCP server manager",
+  "title": "owl07 Configuration",
+  "description": "Configuration file for owl07 - Project-first MCP server manager",
   "type": "object",
   "properties": {
     "$schema": {

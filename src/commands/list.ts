@@ -15,7 +15,7 @@ export function registerList(program: Command): void {
       const servers = Object.entries(config.mcpServers);
 
       if (servers.length === 0) {
-        log.dim('No servers configured. Run mcpx add <name> to add one.');
+        log.dim('No servers configured. Run owl07 add <name> to add one.');
         return;
       }
 

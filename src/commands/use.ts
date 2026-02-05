@@ -25,7 +25,7 @@ export function registerUse(program: Command): void {
           console.log();
         }
 
-        log.dim('Usage: mcpx use <template>');
+        log.dim('Usage: owl07 use <template>');
         log.blank();
         return;
       }
@@ -65,7 +65,7 @@ export function registerUse(program: Command): void {
       if (added < Object.keys(template.servers).length) {
         log.dim(`${added} new, ${Object.keys(template.servers).length - added} already existed`);
       }
-      log.dim('Run mcpx sync to push to your AI tools');
+      log.dim('Run owl07 sync to push to your AI tools');
       log.blank();
     });
 }

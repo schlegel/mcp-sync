@@ -1,10 +1,10 @@
 {
-  "name": "mcpx",
+  "name": "owl07",
   "version": "0.1.0",
   "description": "Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.",
   "type": "module",
   "bin": {
-    "mcpx": "./dist/bin/cli.js"
+    "owl07": "./dist/bin/cli.js"
   },
   "exports": {
     ".": {
@@ -44,9 +44,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aditya-ai-architect/mcpx"
+    "url": "https://github.com/aditya-ai-architect/owl07"
   },
-  "homepage": "https://github.com/aditya-ai-architect/mcpx",
+  "homepage": "https://github.com/aditya-ai-architect/owl07",
   "author": "Aditya Gaurav <aiexpert@adityaai.dev>",
   "license": "MIT",
   "dependencies": {

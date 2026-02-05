@@ -52,7 +52,7 @@ export function registerEnv(program: Command): void {
       console.log();
       if (missing > 0) {
         log.warn(`${missing} variable(s) missing -- sync may produce incomplete configs`);
-        log.dim('Set them in your shell or .env file before running mcpx sync');
+        log.dim('Set them in your shell or .env file before running owl07 sync');
       } else {
         log.success(`All ${found} variable(s) are set`);
       }

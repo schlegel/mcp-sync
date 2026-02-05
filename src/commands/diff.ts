@@ -11,7 +11,7 @@ import type { ServerConfig } from '../core/schema.js';
 export function registerDiff(program: Command): void {
   program
     .command('diff')
-    .description('Show diff between .mcpx.json and client configs')
+    .description('Show diff between .owl07.json and client configs')
     .option('--client <client>', 'Diff against specific client only')
     .action(async (opts: { client?: string }) => {
       const config = await loadProjectConfig();
@@ -59,18 +59,18 @@ export function registerDiff(program: Command): void {
         let clientDiffs = 0;
 
         for (const name of [...allNames].sort()) {
-          const inMcpx = name in resolved;
+          const inOwl = name in resolved;
           const inClient = name in existing;
 
-          if (inMcpx && !inClient) {
+          if (inOwl && !inClient) {
             console.log(`  ${c.success('+ ' + name)} ${c.dim('(will be added)')}`);
             clientDiffs++;
-          } else if (!inMcpx && inClient) {
+          } else if (!inOwl && inClient) {
             console.log(`  ${c.muted('  ' + name)} ${c.dim('(client-only, untouched)')}`);
-          } else if (inMcpx && inClient) {
-            const mcpxJson = JSON.stringify(resolved[name]);
+          } else if (inOwl && inClient) {
+            const owl07Json = JSON.stringify(resolved[name]);
             const clientJson = JSON.stringify(existing[name]);
-            if (mcpxJson === clientJson) {
+            if (owl07Json === clientJson) {
               console.log(`  ${c.dim('  ' + name)} ${c.success('\u2713 in sync')}`);
             } else {
               console.log(`  ${c.warning('~ ' + name)} ${c.dim('(will be updated)')}`);
@@ -90,7 +90,7 @@ export function registerDiff(program: Command): void {
       if (totalDiffs === 0) {
         log.success('Everything is in sync!');
       } else {
-        log.info(`${totalDiffs} change(s) pending -- run ${c.bold('mcpx sync')} to apply`);
+        log.info(`${totalDiffs} change(s) pending -- run ${c.bold('owl07 sync')} to apply`);
       }
       log.blank();
     });

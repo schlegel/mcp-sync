@@ -97,7 +97,7 @@ export async function spawnAndPing(
       params: {
         protocolVersion: '2025-11-25',
         capabilities: {},
-        clientInfo: { name: 'mcpx-doctor', version: VERSION },
+        clientInfo: { name: 'owl07-doctor', version: VERSION },
       },
     };
 

@@ -9,7 +9,7 @@ import { VERSION, DESCRIPTION } from '../core/constants.js';
 const program = new Command();
 
 program
-  .name('mcpx')
+  .name('owl07')
   .description(DESCRIPTION)
   .version(VERSION)
   .hook('preAction', () => {

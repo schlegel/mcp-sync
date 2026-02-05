@@ -27,7 +27,7 @@ export function registerEnable(program: Command): void {
 
       console.log();
       log.success(`Enabled ${c.bold(c.white(name))}`);
-      log.dim('Run mcpx sync to apply changes');
+      log.dim('Run owl07 sync to apply changes');
       log.blank();
     });
 }
@@ -55,7 +55,7 @@ export function registerDisable(program: Command): void {
 
       console.log();
       log.success(`Disabled ${c.bold(c.muted(name))}`);
-      log.dim('Run mcpx sync to apply changes');
+      log.dim('Run owl07 sync to apply changes');
       log.blank();
     });
 }

@@ -10,7 +10,7 @@ export async function promptClients(): Promise<ClientId[]> {
   }));
 
   return checkbox({
-    message: 'Which clients should mcpx sync to?',
+    message: 'Which clients should owl07 sync to?',
     choices,
   });
 }
