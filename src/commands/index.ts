@@ -13,6 +13,9 @@ import { registerEnv } from './env.js';
 import { registerDiff } from './diff.js';
 import { registerEnable, registerDisable } from './toggle.js';
 import { registerExport } from './export.js';
+import { registerValidate } from './validate.js';
+import { registerWatch } from './watch.js';
+import { registerHelp } from './help.js';
 
 export function registerCommands(program: Command): void {
   registerInit(program);
@@ -30,4 +33,7 @@ export function registerCommands(program: Command): void {
   registerEnable(program);
   registerDisable(program);
   registerExport(program);
+  registerValidate(program);
+  registerWatch(program);
+  registerHelp(program);
 }

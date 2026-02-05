@@ -11,8 +11,11 @@ const program = new Command();
 program
   .name('owl07')
   .description(DESCRIPTION)
-  .version(VERSION)
-  .hook('preAction', async () => {
+  .version(VERSION, '-V, --version', 'Show version number')
+  .hook('preAction', async (_thisCommand, actionCommand) => {
+    // Skip banner for help, ?, watch, and default (no-args)
+    const name = actionCommand.name();
+    if (name === 'help' || name === '?' || name === 'watch' || name === 'owl07') return;
     await displayBannerAnimated();
   });
 

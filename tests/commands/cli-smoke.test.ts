@@ -57,11 +57,17 @@ function expectSuccess(result: { stdout: string; stderr: string; exitCode: numbe
 
 describe('CLI smoke tests', () => {
   it('shows help', async () => {
-    const result = await runCli(['--help'], tempDir);
+    const result = await runCli(['help'], tempDir);
     expectSuccess(result);
     expect(result.stdout).toContain('owl07');
     expect(result.stdout).toContain('init');
     expect(result.stdout).toContain('sync');
+  });
+
+  it('shows help with ? alias', async () => {
+    const result = await runCli(['?'], tempDir);
+    expectSuccess(result);
+    expect(result.stdout).toContain('owl07');
   });
 
   it('shows version', async () => {
