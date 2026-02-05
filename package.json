@@ -1,0 +1,67 @@
+{
+  "name": "mcpx",
+  "version": "0.1.0",
+  "description": "Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.",
+  "type": "module",
+  "bin": {
+    "mcpx": "./dist/bin/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "schema",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/bin/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "claude",
+    "cursor",
+    "claude-code",
+    "cli",
+    "developer-tools",
+    "config-management",
+    "project-config"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aditya-ai-architect/mcpx"
+  },
+  "homepage": "https://github.com/aditya-ai-architect/mcpx",
+  "author": "Aditya Gaurav <aiexpert@adityaai.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^8.2.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "cross-spawn": "^7.0.6",
+    "ora": "^9.2.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
+    "@types/node": "^25.2.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

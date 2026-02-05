@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mcpx Configuration",
+  "description": "Configuration file for mcpx - Project-first MCP server manager",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema URL for editor support"
+    },
+    "mcpServers": {
+      "type": "object",
+      "description": "MCP server configurations",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["command"],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Executable command (e.g., npx, node, python)",
+            "minLength": 1
+          },
+          "args": {
+            "type": "array",
+            "description": "Command arguments",
+            "items": { "type": "string" },
+            "default": []
+          },
+          "env": {
+            "type": "object",
+            "description": "Environment variables",
+            "additionalProperties": { "type": "string" },
+            "default": {}
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Disable this server without removing it",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sync": {
+      "type": "object",
+      "description": "Sync configuration",
+      "properties": {
+        "clients": {
+          "type": "array",
+          "description": "Clients to sync MCP config to",
+          "items": {
+            "type": "string",
+            "enum": ["claude-desktop", "cursor", "claude-code"]
+          },
+          "default": ["claude-desktop", "cursor", "claude-code"]
+        }
+      }
+    }
+  },
+  "required": ["mcpServers"]
+}
