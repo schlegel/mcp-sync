@@ -21,11 +21,11 @@
   <circle cx="24" cy="19" r="7" fill="#ff5f56"/>
   <circle cx="46" cy="19" r="7" fill="#ffbd2e"/>
   <circle cx="68" cy="19" r="7" fill="#27c93f"/>
-  <text x="360" y="23" text-anchor="middle" fill="#8b949e" font-size="12" class="t">owl07 list &amp; status</text>
+  <text x="360" y="23" text-anchor="middle" fill="#8b949e" font-size="12" class="t">mcp-sync list &amp; status</text>
 
-  <!-- owl07 list output -->
+  <!-- mcp-sync list output -->
   <text x="30" y="65" class="t dim">$</text>
-  <text x="48" y="65" class="t txt">owl07 list</text>
+  <text x="48" y="65" class="t txt">mcp-sync list</text>
 
   <text x="30" y="90" class="t dim">       Server                Command       Args</text>
   <text x="30" y="106" class="t dim">  ---  --------------------  ------------  ----------------------------------------</text>
@@ -61,9 +61,9 @@
   <!-- Divider -->
   <line x1="30" y1="238" x2="690" y2="238" stroke="#21262d" stroke-width="1"/>
 
-  <!-- owl07 status output -->
+  <!-- mcp-sync status output -->
   <text x="30" y="260" class="t dim">$</text>
-  <text x="48" y="260" class="t txt">owl07 status</text>
+  <text x="48" y="260" class="t txt">mcp-sync status</text>
 
   <text x="30" y="286" class="t grn">  &#9679; filesystem &#8594; enabled</text>
   <text x="30" y="304" class="t grn">  &#9679; github &#8594; enabled</text>
@@ -77,9 +77,9 @@
   <!-- Divider -->
   <line x1="30" y1="420" x2="690" y2="420" stroke="#21262d" stroke-width="1"/>
 
-  <!-- owl07 sync output -->
+  <!-- mcp-sync sync output -->
   <text x="30" y="442" class="t dim">$</text>
-  <text x="48" y="442" class="t txt">owl07 sync</text>
+  <text x="48" y="442" class="t txt">mcp-sync sync</text>
 
   <text x="30" y="464" class="t grn">  &#10003; Synced to Claude Desktop (4 servers)</text>
   <text x="30" y="482" class="t grn">  &#10003; Synced to Cursor (4 servers)</text>
