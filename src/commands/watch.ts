@@ -71,7 +71,7 @@ export function registerWatch(program: Command): void {
             } else {
               log.warn(`${synced} synced, ${failed} failed`);
               for (const r of result.filter((r) => !r.success)) {
-                log.dim(`  ${r.clientId}: ${r.error}`);
+                log.dim(`  ${r.client}: ${r.error}`);
               }
             }
           } catch (err) {
