@@ -1,5 +1,5 @@
 {
-  "name": "mcp-sync",
+  "name": "@schlegel/mcp-sync",
   "version": "0.1.0",
   "description": "Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.",
   "type": "module",
