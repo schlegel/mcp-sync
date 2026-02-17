@@ -2,6 +2,11 @@
 
 All notable changes to mcp-sync will be documented in this file.
 
+## [0.2.0] - 2026-02-17
+
+### Changed
+- Version bump to 0.2.0
+
 ## [0.1.0] - 2026-02-05
 
 ### Added

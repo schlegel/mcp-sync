@@ -1,7 +1,7 @@
 import { homedir, platform } from 'node:os';
 import { join } from 'node:path';
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
 export const NAME = 'mcp-sync';
 export const DESCRIPTION = 'Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.';
 

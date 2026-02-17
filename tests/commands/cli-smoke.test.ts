@@ -73,7 +73,7 @@ describe('CLI smoke tests', () => {
   it('shows version', async () => {
     const result = await runCli(['--version'], tempDir);
     expectSuccess(result);
-    expect(result.stdout.trim()).toBe('0.1.0');
+    expect(result.stdout.trim()).toBe('0.2.0');
   });
 
   it('init creates config file', async () => {
