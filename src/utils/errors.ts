@@ -1,32 +1,32 @@
-export class Owl07Error extends Error {
+export class McpSyncError extends Error {
   constructor(message: string, public code: string) {
     super(message);
-    this.name = 'Owl07Error';
+    this.name = 'McpSyncError';
   }
 }
 
-export class ConfigNotFoundError extends Owl07Error {
+export class ConfigNotFoundError extends McpSyncError {
   constructor(searchPath: string) {
-    super(`No .owl07.json found in ${searchPath} or any parent directory`, 'CONFIG_NOT_FOUND');
+    super(`No .mcp-sync.json found in ${searchPath} or any parent directory`, 'CONFIG_NOT_FOUND');
     this.name = 'ConfigNotFoundError';
   }
 }
 
-export class ConfigValidationError extends Owl07Error {
+export class ConfigValidationError extends McpSyncError {
   constructor(public errors: string[]) {
     super(`Invalid config:\n${errors.map(e => `  - ${e}`).join('\n')}`, 'CONFIG_VALIDATION');
     this.name = 'ConfigValidationError';
   }
 }
 
-export class SyncError extends Owl07Error {
+export class SyncError extends McpSyncError {
   constructor(client: string, reason: string) {
     super(`Sync to ${client} failed: ${reason}`, 'SYNC_ERROR');
     this.name = 'SyncError';
   }
 }
 
-export class HealthCheckError extends Owl07Error {
+export class HealthCheckError extends McpSyncError {
   constructor(server: string, reason: string) {
     super(`Health check for "${server}" failed: ${reason}`, 'HEALTH_CHECK');
     this.name = 'HealthCheckError';
@@ -34,7 +34,7 @@ export class HealthCheckError extends Owl07Error {
 }
 
 export function handleError(error: unknown): never {
-  if (error instanceof Owl07Error) {
+  if (error instanceof McpSyncError) {
     console.error(`\n  Error: ${error.message}\n`);
     process.exit(1);
   }

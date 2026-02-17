@@ -1,1 +1,1 @@
-export type { Owl07Config, ServerConfig, SyncConfig } from '../core/schema.js';
+export type { McpSyncConfig, ServerConfig, SyncConfig } from '../core/schema.js';

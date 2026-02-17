@@ -9,13 +9,13 @@ import { VERSION, DESCRIPTION } from '../core/constants.js';
 const program = new Command();
 
 program
-  .name('owl07')
+  .name('mcp-sync')
   .description(DESCRIPTION)
   .version(VERSION, '-V, --version', 'Show version number')
   .hook('preAction', async (_thisCommand, actionCommand) => {
     // Skip banner for help, ?, watch, and default (no-args)
     const name = actionCommand.name();
-    if (name === 'help' || name === '?' || name === 'watch' || name === 'owl07') return;
+    if (name === 'help' || name === '?' || name === 'watch' || name === 'mcp-sync') return;
     await displayBannerAnimated();
   });
 

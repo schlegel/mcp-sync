@@ -1,5 +1,5 @@
 import type { ClientId } from '../core/constants.js';
-import type { Owl07Config, ServerConfig } from '../core/schema.js';
+import type { McpSyncConfig, ServerConfig } from '../core/schema.js';
 import type { SyncResult, SyncManifest } from '../types/client.js';
 import { getAdapter } from './adapters/index.js';
 import { getSyncManifestPath } from '../core/constants.js';
@@ -7,7 +7,7 @@ import { readJsonFile, writeJsonFile } from '../utils/fs.js';
 import { createContext, resolveAllServers } from '../core/variables.js';
 
 export async function syncToClients(
-  config: Owl07Config,
+  config: McpSyncConfig,
   configDir: string,
   options?: { clients?: ClientId[]; dryRun?: boolean },
 ): Promise<SyncResult[]> {

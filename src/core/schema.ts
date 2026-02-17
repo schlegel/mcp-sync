@@ -13,22 +13,22 @@ export const SyncConfigSchema = z.object({
   ).default(['claude-desktop', 'cursor', 'claude-code']),
 });
 
-export const Owl07ConfigSchema = z.object({
+export const McpSyncConfigSchema = z.object({
   $schema: z.string().optional(),
   mcpServers: z.record(z.string(), ServerConfigSchema).default({}),
   sync: SyncConfigSchema.optional().default({ clients: ['claude-desktop', 'cursor', 'claude-code'] }),
 });
 
-export type Owl07Config = z.infer<typeof Owl07ConfigSchema>;
+export type McpSyncConfig = z.infer<typeof McpSyncConfigSchema>;
 export type ServerConfig = z.infer<typeof ServerConfigSchema>;
 export type SyncConfig = z.infer<typeof SyncConfigSchema>;
 
-export function validateConfig(data: unknown): Owl07Config {
-  return Owl07ConfigSchema.parse(data);
+export function validateConfig(data: unknown): McpSyncConfig {
+  return McpSyncConfigSchema.parse(data);
 }
 
-export function safeValidateConfig(data: unknown): { success: true; data: Owl07Config } | { success: false; errors: string[] } {
-  const result = Owl07ConfigSchema.safeParse(data);
+export function safeValidateConfig(data: unknown): { success: true; data: McpSyncConfig } | { success: false; errors: string[] } {
+  const result = McpSyncConfigSchema.safeParse(data);
   if (result.success) return { success: true, data: result.data };
 
   const errors = result.error.issues.map(
