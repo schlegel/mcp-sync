@@ -20,8 +20,8 @@ describe('constants', () => {
     expect(NAME).toBe('mcp-sync');
   });
 
-  it('CONFIG_FILENAME is .mcp-sync.json', () => {
-    expect(CONFIG_FILENAME).toBe('.mcp-sync.json');
+  it('CONFIG_FILENAME is mcps.json', () => {
+    expect(CONFIG_FILENAME).toBe('mcps.json');
   });
 
   it('ALL_CLIENTS has 3 entries', () => {

@@ -5,7 +5,7 @@ export const VERSION = '0.1.0';
 export const NAME = 'mcp-sync';
 export const DESCRIPTION = 'Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.';
 
-export const CONFIG_FILENAME = '.mcp-sync.json';
+export const CONFIG_FILENAME = 'mcps.json';
 export const GLOBAL_CONFIG_DIR = '.mcp-sync';
 export const GLOBAL_CONFIG_FILENAME = 'config.json';
 export const SYNC_MANIFEST_FILENAME = 'sync-manifest.json';

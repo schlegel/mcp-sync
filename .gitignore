@@ -6,5 +6,6 @@ dist/
 *.mcpx-backup
 *.mcp-sync-backup
 .mcp-sync.json
+mcps.json
 .mcp.json
 .claude/

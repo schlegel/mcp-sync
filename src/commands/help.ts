@@ -1,6 +1,7 @@
 import type { Command } from 'commander';
 import chalk from 'chalk';
 import { VERSION } from '../core/constants.js';
+import { getConfigFilename } from '../core/context.js';
 
 const glow = chalk.hex('#58A6FF');
 const violet = chalk.hex('#BC8CFF');
@@ -20,6 +21,7 @@ function section(title: string): string {
 }
 
 function buildHelp(): string {
+  const configFilename = getConfigFilename();
   const lines = [
     '',
     `  ${glow.bold('OWL')}${violet.bold('07')} ${ghost(`v${VERSION}`)}  ${ghost('─')}  ${dim('Project-first MCP server manager')}`,
@@ -27,7 +29,7 @@ function buildHelp(): string {
     `  ${dim('Usage:')}  ${white('mcp-sync')} ${green('<command>')} ${dim('[options]')}`,
     '',
     section('Setup'),
-    cmd('init', 'Create .mcp-sync.json in current project'),
+    cmd('init', `Create ${configFilename} in current project`),
     cmd('use <template>', 'Apply preset (web, python, fullstack, devops, data, minimal)'),
     cmd('import', 'Import servers from existing Claude/Cursor configs'),
     '',
@@ -51,7 +53,7 @@ function buildHelp(): string {
     cmd('sync --dry', 'Preview sync without writing files'),
     cmd('doctor', 'Health check servers + system dependencies'),
     cmd('validate', 'Validate config schema and references'),
-    cmd('watch', 'Watch .mcp-sync.json and auto-sync on changes'),
+    cmd('watch', `Watch ${configFilename} and auto-sync on changes`),
     '',
     section('Examples'),
     `  ${dim('$')} ${white('mcp-sync init')}`,

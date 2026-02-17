@@ -3,12 +3,14 @@ import { accessSync } from 'node:fs';
 import { CONFIG_FILENAME, getGlobalConfigPath, SCHEMA_URL } from './constants.js';
 import { McpSyncConfigSchema, type McpSyncConfig, type ServerConfig } from './schema.js';
 import { readJsonFile, writeJsonFile, fileExists } from '../utils/fs.js';
+import { getConfigFilename } from './context.js';
 
 export function findConfigPath(startDir?: string): string | null {
   let dir = resolve(startDir || process.cwd());
+  const filename = getConfigFilename();
 
   while (true) {
-    const candidate = join(dir, CONFIG_FILENAME);
+    const candidate = join(dir, filename);
     try {
       accessSync(candidate);
       return candidate;
@@ -62,7 +64,8 @@ export async function loadMergedConfig(cwd?: string): Promise<McpSyncConfig> {
 
 export async function saveProjectConfig(config: McpSyncConfig, cwd?: string): Promise<void> {
   const dir = resolve(cwd || process.cwd());
-  const configPath = join(dir, CONFIG_FILENAME);
+  const filename = getConfigFilename();
+  const configPath = join(dir, filename);
   await writeJsonFile(configPath, { $schema: SCHEMA_URL, ...config });
 }
 
