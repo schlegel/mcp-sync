@@ -52,7 +52,7 @@ npx mcp-sync --config .mcp-sync.json init
 ## Quickstart
 
 ```bash
-# Initialize in your project
+# Initialize in your project (creates mcps.json)
 npx mcp-sync init
 
 # Start with a template (web, python, fullstack, devops, data, minimal)
@@ -70,6 +70,22 @@ npx mcp-sync sync
 # Health check
 npx mcp-sync doctor
 ```
+
+### Using a Custom Config Filename
+
+By default, mcp-sync uses `mcps.json`. You can specify a custom filename with the `--config` flag:
+
+```bash
+# Use .mcp-sync.json instead
+npx mcp-sync --config .mcp-sync.json init
+npx mcp-sync --config .mcp-sync.json add-json myserver '{"command":"echo"}'
+npx mcp-sync --config .mcp-sync.json sync
+
+# Or any other filename you prefer
+npx mcp-sync --config my-servers.json init
+```
+
+The `--config` flag must come **before** the command name.
 
 ---
 
@@ -115,6 +131,8 @@ mcps.json (in your project root)
 
 ## Config Format
 
+The config file (default: `mcps.json`) uses this format:
+
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/schlegel/mcp-sync/main/schema/mcp-sync.schema.json",
@@ -136,6 +154,8 @@ mcps.json (in your project root)
   }
 }
 ```
+
+**Note:** You can name your config file anything you want using the `--config` flag. For backward compatibility with older projects, you might use `.mcp-sync.json`, or choose any name that fits your workflow.
 
 ### Workspace Variables
 
@@ -222,6 +242,35 @@ Templates merge into your existing config -- they never overwrite servers you al
 | **Claude Code** | `.mcp.json` (project) |
 
 mcp-sync **merges** your servers into existing configs -- it never deletes servers you added manually.
+
+---
+
+## Migration from .mcp-sync.json
+
+If you have an existing project using `.mcp-sync.json`:
+
+**Option 1: Continue using .mcp-sync.json**
+```bash
+# Always specify --config flag
+npx mcp-sync --config .mcp-sync.json list
+npx mcp-sync --config .mcp-sync.json sync
+```
+
+**Option 2: Rename to mcps.json**
+```bash
+# Simply rename the file
+mv .mcp-sync.json mcps.json
+
+# Then use without --config flag
+npx mcp-sync list
+npx mcp-sync sync
+```
+
+**Option 3: Use shell alias**
+```bash
+# Add to your .bashrc or .zshrc
+alias mcp-sync='npx mcp-sync --config .mcp-sync.json'
+```
 
 ---
 
