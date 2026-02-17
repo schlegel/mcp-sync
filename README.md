@@ -35,10 +35,16 @@ MCP configs are a mess:
 
 ## The Solution
 
-One `.mcp-sync.json` per project. Version controlled. Synced everywhere.
+One `mcps.json` per project. Version controlled. Synced everywhere.
 
 ```bash
 npx mcp-sync init
+```
+
+Or use a custom config filename:
+
+```bash
+npx mcp-sync --config .mcp-sync.json init
 ```
 
 ---
@@ -92,14 +98,14 @@ The eyes animate in TTY terminals -- they look around, blink, and glow. Non-TTY 
 ## How It Works
 
 ```
-.mcp-sync.json (in your project root)
+mcps.json (in your project root)
     |
     |--- mcp-sync sync --->  Claude Desktop config
     |--- mcp-sync sync --->  Cursor .cursor/mcp.json
     |--- mcp-sync sync --->  Claude Code .mcp.json
 ```
 
-1. Define MCP servers in `.mcp-sync.json` (like `.eslintrc`)
+1. Define MCP servers in `mcps.json` (default) or use `--config` for a custom filename
 2. Use workspace variables for portability (`${workspaceFolder}`, `${env:API_KEY}`)
 3. Commit to git -- your whole team gets the same MCP setup
 4. Run `mcp-sync sync` to push configs to all your AI tools
@@ -135,20 +141,29 @@ The eyes animate in TTY terminals -- they look around, blink, and glow. Non-TTY 
 
 | Variable | Resolves To |
 |----------|------------|
-| `${workspaceFolder}` | Directory containing `.mcp-sync.json` |
+| `${workspaceFolder}` | Directory containing config file (e.g., `mcps.json`) |
 | `${env:VAR_NAME}` | Environment variable value |
 | `${home}` | User home directory |
 | `${platform}` | `win32`, `darwin`, or `linux` |
 
-Variables stay as templates in `.mcp-sync.json` and are resolved at sync time -- making configs portable across machines.
+Variables stay as templates in your config file and are resolved at sync time -- making configs portable across machines.
 
 ---
 
 ## Commands
 
+### Global Options
+
+| Option | Description |
+|--------|-------------|
+| `-c, --config <filename>` | Config filename (default: `mcps.json`) |
+| `-V, --version` | Show version number |
+
+### Command List
+
 | Command | Description |
 |---------|-------------|
-| `mcp-sync init` | Create `.mcp-sync.json` in current project |
+| `mcp-sync init` | Create `mcps.json` in current project |
 | `mcp-sync add <name>` | Add server interactively |
 | `mcp-sync add-json <name> <json>` | Add server from JSON string |
 | `mcp-sync remove <name>` | Remove a server |
@@ -160,7 +175,7 @@ Variables stay as templates in `.mcp-sync.json` and are resolved at sync time --
 | `mcp-sync import` | Import from existing client configs |
 | `mcp-sync use <template>` | Apply preset template |
 | `mcp-sync env` | Audit environment variables referenced in config |
-| `mcp-sync diff` | Show diff between `.mcp-sync.json` and client configs |
+| `mcp-sync diff` | Show diff between config and client configs |
 | `mcp-sync enable <name>` | Enable a disabled server |
 | `mcp-sync disable <name>` | Disable a server without removing it |
 | `mcp-sync export` | Export resolved config as JSON (pipe-friendly) |
@@ -188,7 +203,7 @@ Templates merge into your existing config -- they never overwrite servers you al
 
 | Feature | mcp-sync | MCPM.sh | mcptools | MetaMCP |
 |---------|-------|---------|----------|---------|
-| **Project-first config** | `.mcp-sync.json` per project | Global profiles | Global aggregation | Docker proxy |
+| **Project-first config** | `mcps.json` per project (customizable) | Global profiles | Global aggregation | Docker proxy |
 | **Multi-client sync** | Claude Desktop + Cursor + Claude Code | Partial | No | No |
 | **Git-friendly** | Workspace variables | No | No | No |
 | **Zero install** | `npx mcp-sync` | `pip install` | Go binary | Docker |
