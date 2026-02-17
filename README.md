@@ -12,7 +12,7 @@
 
 **Like `.env` + Homebrew for MCP servers.**
 
-[![npm](https://img.shields.io/npm/v/mcp-sync?color=58A6FF&style=flat-square)](https://www.npmjs.com/package/mcp-sync)
+[![npm](https://img.shields.io/npm/v/@schlegel/mcp-sync?color=58A6FF&style=flat-square)](https://www.npmjs.com/package/@schlegel/mcp-sync)
 [![CI](https://img.shields.io/github/actions/workflow/status/schlegel/mcp-sync/ci.yml?style=flat-square&label=CI)](https://github.com/schlegel/mcp-sync/actions)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-3FB950?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -38,13 +38,13 @@ MCP configs are a mess:
 One `mcps.json` per project. Version controlled. Synced everywhere.
 
 ```bash
-npx mcp-sync init
+npx @schlegel/mcp-sync init
 ```
 
 Or use a custom config filename:
 
 ```bash
-npx mcp-sync --config .mcp-sync.json init
+npx @schlegel/mcp-sync --config .mcp-sync.json init
 ```
 
 ---
@@ -53,22 +53,22 @@ npx mcp-sync --config .mcp-sync.json init
 
 ```bash
 # Initialize in your project (creates mcps.json)
-npx mcp-sync init
+npx @schlegel/mcp-sync init
 
 # Start with a template (web, python, fullstack, devops, data, minimal)
-npx mcp-sync use fullstack
+npx @schlegel/mcp-sync use fullstack
 
 # Or add servers manually
-npx mcp-sync add-json filesystem '{"command":"npx","args":["-y","@modelcontextprotocol/server-filesystem","${workspaceFolder}"]}'
+npx @schlegel/mcp-sync add-json filesystem '{"command":"npx","args":["-y","@modelcontextprotocol/server-filesystem","${workspaceFolder}"]}'
 
 # See what you've got
-npx mcp-sync list
+npx @schlegel/mcp-sync list
 
 # Sync to all your AI tools
-npx mcp-sync sync
+npx @schlegel/mcp-sync sync
 
 # Health check
-npx mcp-sync doctor
+npx @schlegel/mcp-sync doctor
 ```
 
 ### Using a Custom Config Filename
@@ -77,12 +77,12 @@ By default, mcp-sync uses `mcps.json`. You can specify a custom filename with th
 
 ```bash
 # Use .mcp-sync.json instead
-npx mcp-sync --config .mcp-sync.json init
-npx mcp-sync --config .mcp-sync.json add-json myserver '{"command":"echo"}'
-npx mcp-sync --config .mcp-sync.json sync
+npx @schlegel/mcp-sync --config .mcp-sync.json init
+npx @schlegel/mcp-sync --config .mcp-sync.json add-json myserver '{"command":"echo"}'
+npx @schlegel/mcp-sync --config .mcp-sync.json sync
 
 # Or any other filename you prefer
-npx mcp-sync --config my-servers.json init
+npx @schlegel/mcp-sync --config my-servers.json init
 ```
 
 The `--config` flag must come **before** the command name.
@@ -207,12 +207,12 @@ Variables stay as templates in your config file and are resolved at sync time --
 Get started fast with prebuilt server bundles:
 
 ```bash
-npx mcp-sync use web        # filesystem + GitHub + Puppeteer
-npx mcp-sync use python     # filesystem + GitHub + memory
-npx mcp-sync use fullstack  # filesystem + GitHub + Postgres + Puppeteer + memory
-npx mcp-sync use devops     # filesystem + GitHub + Docker
-npx mcp-sync use data       # filesystem + Postgres + SQLite + memory
-npx mcp-sync use minimal    # filesystem + memory
+npx @schlegel/mcp-sync use web        # filesystem + GitHub + Puppeteer
+npx @schlegel/mcp-sync use python     # filesystem + GitHub + memory
+npx @schlegel/mcp-sync use fullstack  # filesystem + GitHub + Postgres + Puppeteer + memory
+npx @schlegel/mcp-sync use devops     # filesystem + GitHub + Docker
+npx @schlegel/mcp-sync use data       # filesystem + Postgres + SQLite + memory
+npx @schlegel/mcp-sync use minimal    # filesystem + memory
 ```
 
 Templates merge into your existing config -- they never overwrite servers you already have.
@@ -226,7 +226,7 @@ Templates merge into your existing config -- they never overwrite servers you al
 | **Project-first config** | `mcps.json` per project (customizable) | Global profiles | Global aggregation | Docker proxy |
 | **Multi-client sync** | Claude Desktop + Cursor + Claude Code | Partial | No | No |
 | **Git-friendly** | Workspace variables | No | No | No |
-| **Zero install** | `npx mcp-sync` | `pip install` | Go binary | Docker |
+| **Zero install** | `npx @schlegel/mcp-sync` | `pip install` | Go binary | Docker |
 | **Health checks** | JSON-RPC ping | No | No | No |
 | **Import existing** | From all clients | No | Scan only | No |
 | **Templates** | 6 presets | No | No | No |
@@ -252,8 +252,8 @@ If you have an existing project using `.mcp-sync.json`:
 **Option 1: Continue using .mcp-sync.json**
 ```bash
 # Always specify --config flag
-npx mcp-sync --config .mcp-sync.json list
-npx mcp-sync --config .mcp-sync.json sync
+npx @schlegel/mcp-sync --config .mcp-sync.json list
+npx @schlegel/mcp-sync --config .mcp-sync.json sync
 ```
 
 **Option 2: Rename to mcps.json**
@@ -262,14 +262,14 @@ npx mcp-sync --config .mcp-sync.json sync
 mv .mcp-sync.json mcps.json
 
 # Then use without --config flag
-npx mcp-sync list
-npx mcp-sync sync
+npx @schlegel/mcp-sync list
+npx @schlegel/mcp-sync sync
 ```
 
 **Option 3: Use shell alias**
 ```bash
 # Add to your .bashrc or .zshrc
-alias mcp-sync='npx mcp-sync --config .mcp-sync.json'
+alias mcp-sync='npx @schlegel/mcp-sync --config .mcp-sync.json'
 ```
 
 ---

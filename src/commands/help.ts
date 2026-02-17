@@ -63,7 +63,7 @@ function buildHelp(): string {
     `  ${dim('$')} ${white('mcp-sync doctor')}`,
     '',
     `  ${dim('Docs:')}  ${glow('https://github.com/schlegel/mcp-sync')}`,
-    `  ${dim('npm:')}   ${glow('https://www.npmjs.com/package/mcp-sync')}`,
+    `  ${dim('npm:')}   ${glow('https://www.npmjs.com/package/@schlegel/mcp-sync')}`,
     '',
   ];
 
