@@ -47,7 +47,7 @@
     "url": "https://github.com/schlegel/mcp-sync"
   },
   "homepage": "https://github.com/schlegel/mcp-sync",
-  "author": "Aditya Gaurav <aiexpert@adityaai.dev>",
+  "author": "schlegel",
   "license": "MIT",
   "dependencies": {
     "@inquirer/prompts": "^8.2.0",
