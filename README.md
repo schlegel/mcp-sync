@@ -1,14 +1,6 @@
 <div align="center">
 
-<br>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/banner.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/banner.svg">
-  <img alt="mcp-sync - Project-first MCP server manager" src="assets/banner.svg" width="680">
-</picture>
-
-<br>
+# mcp-sync
 
 **Like `.env` + Homebrew for MCP servers.**
 
@@ -94,20 +86,6 @@ The `--config` flag must come **before** the command name.
 <div align="center">
 <img src="assets/demo.svg" alt="mcp-sync CLI demo" width="680">
 </div>
-
-The CLI features an animated owl-eyes banner that plays on startup:
-
-```
-   ╭───────╮     ╭───────╮    ██  █   █ █      ██  ████
-   │       │     │       │   █  █ █   █ █     █  █    █
-   │   ◉   │     │   ◉   │   █  █ █ █ █ █     █  █   █
-   │       │     │       │   █  █ ██ ██ █     █  █  █
-   ╰───────╯     ╰───────╯    ██   █ █  ████   ██  █
-
-   v0.1.0 · Project-first MCP server manager
-```
-
-The eyes animate in TTY terminals -- they look around, blink, and glow. Non-TTY environments (pipes, CI) get the static version.
 
 ---
 
