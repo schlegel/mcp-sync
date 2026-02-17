@@ -21,7 +21,7 @@ describe('ConfigNotFoundError', () => {
   it('creates error with search path', () => {
     const err = new ConfigNotFoundError('/my/path');
     expect(err.message).toContain('/my/path');
-    expect(err.message).toContain('.mcp-sync.json');
+    expect(err.message).toContain('mcps.json');
     expect(err.code).toBe('CONFIG_NOT_FOUND');
     expect(err.name).toBe('ConfigNotFoundError');
     expect(err instanceof McpSyncError).toBe(true);

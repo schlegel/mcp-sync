@@ -1,12 +1,12 @@
 import type { Command } from 'commander';
 import { join, resolve } from 'node:path';
-import { CONFIG_FILENAME, SCHEMA_URL } from '../core/constants.js';
 import { saveProjectConfig, createEmptyConfig } from '../core/config.js';
 import { fileExists } from '../utils/fs.js';
 import { log } from '../ui/logger.js';
 import { c, sym } from '../ui/theme.js';
 import { promptClients, promptConfirm } from '../ui/prompts.js';
 import type { ClientId } from '../core/constants.js';
+import { getConfigFilename } from '../core/context.js';
 
 export function registerInit(program: Command): void {
   program
@@ -16,11 +16,12 @@ export function registerInit(program: Command): void {
     .option('--force', 'Overwrite existing config')
     .action(async (opts: { yes?: boolean; force?: boolean }) => {
       const cwd = resolve(process.cwd());
-      const configPath = join(cwd, CONFIG_FILENAME);
+      const configFilename = getConfigFilename();
+      const configPath = join(cwd, configFilename);
 
       if (await fileExists(configPath)) {
         if (!opts.force) {
-          log.warn(`${CONFIG_FILENAME} already exists. Use --force to overwrite.`);
+          log.warn(`${configFilename} already exists. Use --force to overwrite.`);
           return;
         }
       }
@@ -38,7 +39,7 @@ export function registerInit(program: Command): void {
 
       await saveProjectConfig(config, cwd);
 
-      log.success(`Created ${c.bold(CONFIG_FILENAME)}`);
+      log.success(`Created ${c.bold(configFilename)}`);
       log.blank();
       log.dim('Next steps:');
       log.dim(`  mcp-sync add <server-name>    Add an MCP server`);

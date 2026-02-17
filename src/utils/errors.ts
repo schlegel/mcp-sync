@@ -1,3 +1,5 @@
+import { getConfigFilename } from '../core/context.js';
+
 export class McpSyncError extends Error {
   constructor(message: string, public code: string) {
     super(message);
@@ -7,7 +9,8 @@ export class McpSyncError extends Error {
 
 export class ConfigNotFoundError extends McpSyncError {
   constructor(searchPath: string) {
-    super(`No .mcp-sync.json found in ${searchPath} or any parent directory`, 'CONFIG_NOT_FOUND');
+    const configFilename = getConfigFilename();
+    super(`No ${configFilename} found in ${searchPath} or any parent directory`, 'CONFIG_NOT_FOUND');
     this.name = 'ConfigNotFoundError';
   }
 }
