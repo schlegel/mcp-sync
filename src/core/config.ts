@@ -5,9 +5,9 @@ import { McpSyncConfigSchema, type McpSyncConfig, type ServerConfig } from './sc
 import { readJsonFile, writeJsonFile, fileExists } from '../utils/fs.js';
 import { getConfigFilename } from './context.js';
 
-export function findConfigPath(startDir?: string, configFilename?: string): string | null {
+export function findConfigPath(startDir?: string): string | null {
   let dir = resolve(startDir || process.cwd());
-  const filename = configFilename || getConfigFilename();
+  const filename = getConfigFilename();
 
   while (true) {
     const candidate = join(dir, filename);
@@ -26,8 +26,8 @@ export function findConfigPath(startDir?: string, configFilename?: string): stri
   return null;
 }
 
-export async function loadProjectConfig(cwd?: string, configFilename?: string): Promise<McpSyncConfig | null> {
-  const configPath = findConfigPath(cwd, configFilename);
+export async function loadProjectConfig(cwd?: string): Promise<McpSyncConfig | null> {
+  const configPath = findConfigPath(cwd);
   if (!configPath) return null;
 
   const raw = await readJsonFile<unknown>(configPath);
@@ -44,8 +44,8 @@ export async function loadGlobalConfig(): Promise<McpSyncConfig | null> {
   return McpSyncConfigSchema.parse(raw);
 }
 
-export async function loadMergedConfig(cwd?: string, configFilename?: string): Promise<McpSyncConfig> {
-  const project = await loadProjectConfig(cwd, configFilename);
+export async function loadMergedConfig(cwd?: string): Promise<McpSyncConfig> {
+  const project = await loadProjectConfig(cwd);
   const global = await loadGlobalConfig();
 
   if (!project && !global) {
@@ -62,15 +62,15 @@ export async function loadMergedConfig(cwd?: string, configFilename?: string): P
   };
 }
 
-export async function saveProjectConfig(config: McpSyncConfig, cwd?: string, configFilename?: string): Promise<void> {
+export async function saveProjectConfig(config: McpSyncConfig, cwd?: string): Promise<void> {
   const dir = resolve(cwd || process.cwd());
-  const filename = configFilename || getConfigFilename();
+  const filename = getConfigFilename();
   const configPath = join(dir, filename);
   await writeJsonFile(configPath, { $schema: SCHEMA_URL, ...config });
 }
 
-export function getConfigDir(cwd?: string, configFilename?: string): string {
-  const configPath = findConfigPath(cwd, configFilename);
+export function getConfigDir(cwd?: string): string {
+  const configPath = findConfigPath(cwd);
   if (configPath) return dirname(configPath);
   return resolve(cwd || process.cwd());
 }
