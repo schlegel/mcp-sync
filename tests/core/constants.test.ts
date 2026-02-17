@@ -12,8 +12,8 @@ import {
 } from '../../src/core/constants.js';
 
 describe('constants', () => {
-  it('VERSION is 0.1.0', () => {
-    expect(VERSION).toBe('0.1.0');
+  it('VERSION is 0.2.0', () => {
+    expect(VERSION).toBe('0.2.0');
   });
 
   it('NAME is mcp-sync', () => {
