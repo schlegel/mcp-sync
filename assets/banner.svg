@@ -19,7 +19,7 @@
   <circle cx="68" cy="19" r="7" fill="#27c93f"/>
 
   <!-- Terminal title -->
-  <text x="360" y="23" text-anchor="middle" fill="#8b949e" font-size="12" class="term">owl07</text>
+  <text x="360" y="23" text-anchor="middle" fill="#8b949e" font-size="12" class="term">mcp-sync</text>
 
   <!-- Left eye box -->
   <g transform="translate(60, 65)">
@@ -121,12 +121,12 @@
 
   <!-- Command demo -->
   <text x="60" y="228" fill="#6e7681" font-size="12" class="term">$</text>
-  <text x="78" y="228" fill="#e6edf3" font-size="12" class="term">npx owl07 init</text>
+  <text x="78" y="228" fill="#e6edf3" font-size="12" class="term">npx mcp-sync init</text>
 
   <text x="60" y="250" fill="#3fb950" font-size="12" class="term">&#10003; Created .mcp-sync.json</text>
 
   <text x="60" y="278" fill="#6e7681" font-size="12" class="term">$</text>
-  <text x="78" y="278" fill="#e6edf3" font-size="12" class="term">npx owl07 use fullstack</text>
+  <text x="78" y="278" fill="#e6edf3" font-size="12" class="term">npx mcp-sync use fullstack</text>
 
   <text x="60" y="300" fill="#3fb950" font-size="12" class="term">&#10003; Applied template fullstack (5 servers)</text>
 </svg>
