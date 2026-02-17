@@ -16,12 +16,12 @@ describe('constants', () => {
     expect(VERSION).toBe('0.1.0');
   });
 
-  it('NAME is owl07', () => {
-    expect(NAME).toBe('owl07');
+  it('NAME is mcp-sync', () => {
+    expect(NAME).toBe('mcp-sync');
   });
 
-  it('CONFIG_FILENAME is .owl07.json', () => {
-    expect(CONFIG_FILENAME).toBe('.owl07.json');
+  it('CONFIG_FILENAME is .mcp-sync.json', () => {
+    expect(CONFIG_FILENAME).toBe('.mcp-sync.json');
   });
 
   it('ALL_CLIENTS has 3 entries', () => {
@@ -57,8 +57,8 @@ describe('getClientConfigPath', () => {
 });
 
 describe('global paths', () => {
-  it('getGlobalConfigDir contains .owl07', () => {
-    expect(getGlobalConfigDir()).toContain('.owl07');
+  it('getGlobalConfigDir contains .mcp-sync', () => {
+    expect(getGlobalConfigDir()).toContain('.mcp-sync');
   });
 
   it('getGlobalConfigPath contains config.json', () => {

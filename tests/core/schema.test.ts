@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  Owl07ConfigSchema,
+  McpSyncConfigSchema,
   ServerConfigSchema,
   validateConfig,
   safeValidateConfig,
@@ -43,15 +43,15 @@ describe('ServerConfigSchema', () => {
   });
 });
 
-describe('Owl07ConfigSchema', () => {
+describe('McpSyncConfigSchema', () => {
   it('parses minimal config', () => {
-    const result = Owl07ConfigSchema.parse({ mcpServers: {} });
+    const result = McpSyncConfigSchema.parse({ mcpServers: {} });
     expect(result.mcpServers).toEqual({});
     expect(result.sync.clients).toEqual(['claude-desktop', 'cursor', 'claude-code']);
   });
 
   it('parses config with servers', () => {
-    const result = Owl07ConfigSchema.parse({
+    const result = McpSyncConfigSchema.parse({
       mcpServers: {
         test: { command: 'echo' },
       },
@@ -61,7 +61,7 @@ describe('Owl07ConfigSchema', () => {
   });
 
   it('parses config with $schema', () => {
-    const result = Owl07ConfigSchema.parse({
+    const result = McpSyncConfigSchema.parse({
       $schema: 'https://example.com/schema.json',
       mcpServers: {},
     });
@@ -69,7 +69,7 @@ describe('Owl07ConfigSchema', () => {
   });
 
   it('parses config with custom sync clients', () => {
-    const result = Owl07ConfigSchema.parse({
+    const result = McpSyncConfigSchema.parse({
       mcpServers: {},
       sync: { clients: ['cursor'] },
     });
@@ -78,7 +78,7 @@ describe('Owl07ConfigSchema', () => {
 
   it('rejects invalid client names', () => {
     expect(() =>
-      Owl07ConfigSchema.parse({
+      McpSyncConfigSchema.parse({
         mcpServers: {},
         sync: { clients: ['invalid-client'] },
       }),
@@ -86,7 +86,7 @@ describe('Owl07ConfigSchema', () => {
   });
 
   it('applies defaults for optional fields', () => {
-    const result = Owl07ConfigSchema.parse({ mcpServers: {} });
+    const result = McpSyncConfigSchema.parse({ mcpServers: {} });
     expect(result.sync).toBeDefined();
     expect(result.sync.clients).toHaveLength(3);
   });

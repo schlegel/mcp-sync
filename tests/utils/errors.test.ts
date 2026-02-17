@@ -1,18 +1,18 @@
 import { describe, it, expect } from 'vitest';
 import {
-  Owl07Error,
+  McpSyncError,
   ConfigNotFoundError,
   ConfigValidationError,
   SyncError,
   HealthCheckError,
 } from '../../src/utils/errors.js';
 
-describe('Owl07Error', () => {
+describe('McpSyncError', () => {
   it('creates error with message and code', () => {
-    const err = new Owl07Error('test message', 'TEST_CODE');
+    const err = new McpSyncError('test message', 'TEST_CODE');
     expect(err.message).toBe('test message');
     expect(err.code).toBe('TEST_CODE');
-    expect(err.name).toBe('Owl07Error');
+    expect(err.name).toBe('McpSyncError');
     expect(err instanceof Error).toBe(true);
   });
 });
@@ -21,10 +21,10 @@ describe('ConfigNotFoundError', () => {
   it('creates error with search path', () => {
     const err = new ConfigNotFoundError('/my/path');
     expect(err.message).toContain('/my/path');
-    expect(err.message).toContain('.owl07.json');
+    expect(err.message).toContain('.mcp-sync.json');
     expect(err.code).toBe('CONFIG_NOT_FOUND');
     expect(err.name).toBe('ConfigNotFoundError');
-    expect(err instanceof Owl07Error).toBe(true);
+    expect(err instanceof McpSyncError).toBe(true);
   });
 });
 

@@ -12,7 +12,7 @@ import { fileExists } from '../utils/fs.js';
 export function registerWatch(program: Command): void {
   program
     .command('watch')
-    .description('Watch .owl07.json and auto-sync on changes')
+    .description('Watch .mcp-sync.json and auto-sync on changes')
     .option('--client <client>', 'Only sync to specific client')
     .action(async (opts: { client?: string }) => {
       const configPath = join(process.cwd(), CONFIG_FILENAME);

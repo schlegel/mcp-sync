@@ -11,7 +11,7 @@ import type { ServerConfig } from '../core/schema.js';
 export function registerDiff(program: Command): void {
   program
     .command('diff')
-    .description('Show diff between .owl07.json and client configs')
+    .description('Show diff between .mcp-sync.json and client configs')
     .option('--client <client>', 'Diff against specific client only')
     .option('--json', 'Output as JSON')
     .action(async (opts: { client?: string; json?: boolean }) => {
@@ -59,9 +59,9 @@ export function registerDiff(program: Command): void {
             } else if (!inOwl && inClient) {
               diffs.push({ server: name, status: 'client-only' });
             } else if (inOwl && inClient) {
-              const owl07Json = JSON.stringify(resolved[name]);
+              const mcpSyncJson = JSON.stringify(resolved[name]);
               const clientJson = JSON.stringify(existing[name]);
-              diffs.push({ server: name, status: owl07Json === clientJson ? 'in-sync' : 'updated' });
+              diffs.push({ server: name, status: mcpSyncJson === clientJson ? 'in-sync' : 'updated' });
             }
           }
         }
@@ -101,7 +101,7 @@ export function registerDiff(program: Command): void {
       if (totalDiffs === 0) {
         log.success('Everything is in sync!');
       } else {
-        log.info(`${totalDiffs} change(s) pending -- run ${c.bold('owl07 sync')} to apply`);
+        log.info(`${totalDiffs} change(s) pending -- run ${c.bold('mcp-sync sync')} to apply`);
       }
       log.blank();
     });

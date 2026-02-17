@@ -40,7 +40,7 @@ function runCli(args: string[], cwd: string): Promise<{ stdout: string; stderr: 
 let tempDir: string;
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(join(tmpdir(), 'owl07-cli-test-'));
+  tempDir = await mkdtemp(join(tmpdir(), 'mcp-sync-cli-test-'));
 });
 
 afterEach(async () => {
@@ -59,7 +59,7 @@ describe('CLI smoke tests', () => {
   it('shows help', async () => {
     const result = await runCli(['help'], tempDir);
     expectSuccess(result);
-    expect(result.stdout).toContain('owl07');
+    expect(result.stdout).toContain('mcp-sync');
     expect(result.stdout).toContain('init');
     expect(result.stdout).toContain('sync');
   });
@@ -67,7 +67,7 @@ describe('CLI smoke tests', () => {
   it('shows help with ? alias', async () => {
     const result = await runCli(['?'], tempDir);
     expectSuccess(result);
-    expect(result.stdout).toContain('owl07');
+    expect(result.stdout).toContain('mcp-sync');
   });
 
   it('shows version', async () => {
@@ -79,9 +79,9 @@ describe('CLI smoke tests', () => {
   it('init creates config file', async () => {
     const result = await runCli(['init', '-y'], tempDir);
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('Created .owl07.json');
+    expect(result.stdout).toContain('Created .mcp-sync.json');
 
-    const config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    const config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers).toEqual({});
     expect(config.sync.clients).toHaveLength(3);
   });
@@ -95,7 +95,7 @@ describe('CLI smoke tests', () => {
     expect(result.exitCode).toBe(0);
     expect(result.stdout).toContain('Added server test-server');
 
-    const config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    const config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers['test-server'].command).toBe('echo');
   });
 
@@ -123,14 +123,14 @@ describe('CLI smoke tests', () => {
     expect(disableResult.exitCode).toBe(0);
     expect(disableResult.stdout).toContain('Disabled');
 
-    let config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    let config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers.srv.disabled).toBe(true);
 
     const enableResult = await runCli(['enable', 'srv'], tempDir);
     expect(enableResult.exitCode).toBe(0);
     expect(enableResult.stdout).toContain('Enabled');
 
-    config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers.srv.disabled).toBe(false);
   });
 
@@ -141,7 +141,7 @@ describe('CLI smoke tests', () => {
     expect(result.exitCode).toBe(0);
     expect(result.stdout).toContain('Removed');
 
-    const config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    const config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers.srv).toBeUndefined();
   });
 
@@ -159,7 +159,7 @@ describe('CLI smoke tests', () => {
     expect(result.exitCode).toBe(0);
     expect(result.stdout).toContain('Applied template');
 
-    const config = JSON.parse(await readFile(join(tempDir, '.owl07.json'), 'utf-8'));
+    const config = JSON.parse(await readFile(join(tempDir, '.mcp-sync.json'), 'utf-8'));
     expect(config.mcpServers.filesystem).toBeDefined();
     expect(config.mcpServers.memory).toBeDefined();
   });

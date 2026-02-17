@@ -68,7 +68,7 @@ describe('BaseAdapter.writeServers', () => {
   let tempDir: string;
 
   beforeEach(async () => {
-    tempDir = await mkdtemp(join(tmpdir(), 'owl07-adapter-test-'));
+    tempDir = await mkdtemp(join(tmpdir(), 'mcp-sync-adapter-test-'));
   });
 
   afterEach(async () => {
