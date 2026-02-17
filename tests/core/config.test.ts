@@ -17,7 +17,7 @@ import { CONFIG_FILENAME } from '../../src/core/constants.js';
 let tempDir: string;
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(join(tmpdir(), 'owl07-test-'));
+  tempDir = await mkdtemp(join(tmpdir(), 'mcp-sync-test-'));
 });
 
 afterEach(async () => {

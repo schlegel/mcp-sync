@@ -20,7 +20,7 @@ function clearLines(n: number): void {
   }
 }
 
-// ──── Block-letter OWL07 logo (5 lines tall) ────
+// ──── Block-letter MCP-SYNC logo (5 lines tall) ────
 
 const OWL_ROWS = [
   ' ██  █   █ █   ',

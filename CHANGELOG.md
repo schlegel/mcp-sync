@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to owl07 will be documented in this file.
+All notable changes to mcp-sync will be documented in this file.
 
 ## [0.1.0] - 2026-02-05
 
@@ -15,9 +15,9 @@ All notable changes to owl07 will be documented in this file.
 - Config schema validation with Zod v4
 - Atomic file writes with backup support
 - Import from existing Claude Desktop / Cursor / Claude Code configs
-- Beautiful custom help screen (`owl07 help` or `owl07 ?`)
-- `owl07 watch` for auto-sync on config changes
-- `owl07 validate` for config validation
+- Beautiful custom help screen (`mcp-sync help` or `mcp-sync ?`)
+- `mcp-sync watch` for auto-sync on config changes
+- `mcp-sync validate` for config validation
 - 147 tests across 14 test files
 - CI pipeline (Node 20 + 22)
 

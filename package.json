@@ -1,10 +1,10 @@
 {
-  "name": "owl07",
+  "name": "mcp-sync",
   "version": "0.1.0",
   "description": "Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.",
   "type": "module",
   "bin": {
-    "owl07": "./dist/bin/cli.js"
+    "mcp-sync": "./dist/bin/cli.js"
   },
   "exports": {
     ".": {
@@ -44,9 +44,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aditya-ai-architect/owl07"
+    "url": "https://github.com/schlegel/mcp-sync"
   },
-  "homepage": "https://github.com/aditya-ai-architect/owl07",
+  "homepage": "https://github.com/schlegel/mcp-sync",
   "author": "Aditya Gaurav <aiexpert@adityaai.dev>",
   "license": "MIT",
   "dependencies": {

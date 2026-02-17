@@ -22,7 +22,7 @@ export function registerSync(program: Command): void {
       const enabledServers = Object.entries(config.mcpServers).filter(([, s]) => !s.disabled);
 
       if (enabledServers.length === 0) {
-        log.warn('No enabled servers to sync. Add servers with owl07 add.');
+        log.warn('No enabled servers to sync. Add servers with mcp-sync add.');
         return;
       }
 

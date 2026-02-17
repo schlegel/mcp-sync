@@ -37,7 +37,7 @@ export async function atomicWrite(filePath: string, content: string): Promise<vo
   await rename(tmpPath, filePath);
 }
 
-export async function createBackup(filePath: string, suffix = '.owl07-backup'): Promise<string | null> {
+export async function createBackup(filePath: string, suffix = '.mcp-sync-backup'): Promise<string | null> {
   if (!(await fileExists(filePath))) return null;
   const backupPath = filePath + suffix;
   await copyFile(filePath, backupPath);

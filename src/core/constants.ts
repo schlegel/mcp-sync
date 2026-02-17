@@ -2,15 +2,15 @@ import { homedir, platform } from 'node:os';
 import { join } from 'node:path';
 
 export const VERSION = '0.1.0';
-export const NAME = 'owl07';
+export const NAME = 'mcp-sync';
 export const DESCRIPTION = 'Project-first MCP server manager. Like dotenv + Homebrew for MCP servers.';
 
-export const CONFIG_FILENAME = '.owl07.json';
-export const GLOBAL_CONFIG_DIR = '.owl07';
+export const CONFIG_FILENAME = '.mcp-sync.json';
+export const GLOBAL_CONFIG_DIR = '.mcp-sync';
 export const GLOBAL_CONFIG_FILENAME = 'config.json';
 export const SYNC_MANIFEST_FILENAME = 'sync-manifest.json';
-export const BACKUP_SUFFIX = '.owl07-backup';
-export const SCHEMA_URL = 'https://raw.githubusercontent.com/aditya-ai-architect/owl07/main/schema/owl07.schema.json';
+export const BACKUP_SUFFIX = '.mcp-sync-backup';
+export const SCHEMA_URL = 'https://raw.githubusercontent.com/schlegel/mcp-sync/main/schema/mcp-sync.schema.json';
 
 export const HEALTH_CHECK_TIMEOUT_MS = 10_000;
 export const JSON_RPC_VERSION = '2.0' as const;

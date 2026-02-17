@@ -15,7 +15,7 @@ import {
 let tempDir: string;
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(join(tmpdir(), 'owl07-fs-test-'));
+  tempDir = await mkdtemp(join(tmpdir(), 'mcp-sync-fs-test-'));
 });
 
 afterEach(async () => {
@@ -110,7 +110,7 @@ describe('createBackup', () => {
     const filePath = join(tempDir, 'config.json');
     await writeFile(filePath, '{"original": true}');
     const backupPath = await createBackup(filePath);
-    expect(backupPath).toBe(filePath + '.owl07-backup');
+    expect(backupPath).toBe(filePath + '.mcp-sync-backup');
     const content = await readFile(backupPath!, 'utf-8');
     expect(content).toBe('{"original": true}');
   });

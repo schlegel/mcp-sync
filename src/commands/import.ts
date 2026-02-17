@@ -79,7 +79,7 @@ export function registerImport(program: Command): void {
 
       await saveProjectConfig(config);
       log.success(`Imported ${selected.length} server(s)`);
-      log.dim('Run owl07 list to see them, owl07 sync to sync to clients.');
+      log.dim('Run mcp-sync list to see them, mcp-sync sync to sync to clients.');
       log.blank();
     });
 }

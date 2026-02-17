@@ -1,12 +1,12 @@
-# Contributing to owl07
+# Contributing to mcp-sync
 
 Thanks for your interest in contributing! Here's how to get started.
 
 ## Development Setup
 
 ```bash
-git clone https://github.com/aditya-ai-architect/owl07.git
-cd owl07
+git clone https://github.com/schlegel/mcp-sync.git
+cd mcp-sync
 npm install
 npm run build
 npm run test
@@ -62,7 +62,7 @@ tests/                Vitest test suite (mirrors src/ structure)
 
 ## Reporting Issues
 
-Use [GitHub Issues](https://github.com/aditya-ai-architect/owl07/issues). Include:
+Use [GitHub Issues](https://github.com/schlegel/mcp-sync/issues). Include:
 - Node.js version (`node --version`)
 - OS and version
 - Steps to reproduce

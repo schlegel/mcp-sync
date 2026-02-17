@@ -1,7 +1,7 @@
 import { resolve, dirname, join } from 'node:path';
 import { accessSync } from 'node:fs';
 import { CONFIG_FILENAME, getGlobalConfigPath, SCHEMA_URL } from './constants.js';
-import { Owl07ConfigSchema, type Owl07Config, type ServerConfig } from './schema.js';
+import { McpSyncConfigSchema, type McpSyncConfig, type ServerConfig } from './schema.js';
 import { readJsonFile, writeJsonFile, fileExists } from '../utils/fs.js';
 
 export function findConfigPath(startDir?: string): string | null {
@@ -24,25 +24,25 @@ export function findConfigPath(startDir?: string): string | null {
   return null;
 }
 
-export async function loadProjectConfig(cwd?: string): Promise<Owl07Config | null> {
+export async function loadProjectConfig(cwd?: string): Promise<McpSyncConfig | null> {
   const configPath = findConfigPath(cwd);
   if (!configPath) return null;
 
   const raw = await readJsonFile<unknown>(configPath);
   if (!raw) return null;
 
-  return Owl07ConfigSchema.parse(raw);
+  return McpSyncConfigSchema.parse(raw);
 }
 
-export async function loadGlobalConfig(): Promise<Owl07Config | null> {
+export async function loadGlobalConfig(): Promise<McpSyncConfig | null> {
   const globalPath = getGlobalConfigPath();
   const raw = await readJsonFile<unknown>(globalPath);
   if (!raw) return null;
 
-  return Owl07ConfigSchema.parse(raw);
+  return McpSyncConfigSchema.parse(raw);
 }
 
-export async function loadMergedConfig(cwd?: string): Promise<Owl07Config> {
+export async function loadMergedConfig(cwd?: string): Promise<McpSyncConfig> {
   const project = await loadProjectConfig(cwd);
   const global = await loadGlobalConfig();
 
@@ -60,7 +60,7 @@ export async function loadMergedConfig(cwd?: string): Promise<Owl07Config> {
   };
 }
 
-export async function saveProjectConfig(config: Owl07Config, cwd?: string): Promise<void> {
+export async function saveProjectConfig(config: McpSyncConfig, cwd?: string): Promise<void> {
   const dir = resolve(cwd || process.cwd());
   const configPath = join(dir, CONFIG_FILENAME);
   await writeJsonFile(configPath, { $schema: SCHEMA_URL, ...config });
@@ -72,7 +72,7 @@ export function getConfigDir(cwd?: string): string {
   return resolve(cwd || process.cwd());
 }
 
-export function createEmptyConfig(): Owl07Config {
+export function createEmptyConfig(): McpSyncConfig {
   return {
     $schema: SCHEMA_URL,
     mcpServers: {},
@@ -80,18 +80,18 @@ export function createEmptyConfig(): Owl07Config {
   };
 }
 
-export function addServer(config: Owl07Config, name: string, server: ServerConfig): Owl07Config {
+export function addServer(config: McpSyncConfig, name: string, server: ServerConfig): McpSyncConfig {
   return {
     ...config,
     mcpServers: { ...config.mcpServers, [name]: server },
   };
 }
 
-export function removeServer(config: Owl07Config, name: string): Owl07Config {
+export function removeServer(config: McpSyncConfig, name: string): McpSyncConfig {
   const { [name]: _, ...rest } = config.mcpServers;
   return { ...config, mcpServers: rest };
 }
 
-export function hasServer(config: Owl07Config, name: string): boolean {
+export function hasServer(config: McpSyncConfig, name: string): boolean {
   return name in config.mcpServers;
 }

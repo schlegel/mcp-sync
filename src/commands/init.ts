@@ -11,7 +11,7 @@ import type { ClientId } from '../core/constants.js';
 export function registerInit(program: Command): void {
   program
     .command('init')
-    .description('Initialize owl07 in the current project')
+    .description('Initialize mcp-sync in the current project')
     .option('-y, --yes', 'Skip prompts and use defaults')
     .option('--force', 'Overwrite existing config')
     .action(async (opts: { yes?: boolean; force?: boolean }) => {
@@ -41,9 +41,9 @@ export function registerInit(program: Command): void {
       log.success(`Created ${c.bold(CONFIG_FILENAME)}`);
       log.blank();
       log.dim('Next steps:');
-      log.dim(`  owl07 add <server-name>    Add an MCP server`);
-      log.dim(`  owl07 import               Import from existing configs`);
-      log.dim(`  owl07 sync                 Sync to your AI tools`);
+      log.dim(`  mcp-sync add <server-name>    Add an MCP server`);
+      log.dim(`  mcp-sync import               Import from existing configs`);
+      log.dim(`  mcp-sync sync                 Sync to your AI tools`);
       log.blank();
     });
 }

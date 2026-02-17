@@ -3,19 +3,19 @@ import { mkdtemp, rm, writeFile, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { syncToClients } from '../../src/sync/engine.js';
-import type { Owl07Config } from '../../src/core/schema.js';
+import type { McpSyncConfig } from '../../src/core/schema.js';
 
 let tempDir: string;
 
 beforeEach(async () => {
-  tempDir = await mkdtemp(join(tmpdir(), 'owl07-sync-test-'));
+  tempDir = await mkdtemp(join(tmpdir(), 'mcp-sync-sync-test-'));
 });
 
 afterEach(async () => {
   await rm(tempDir, { recursive: true, force: true });
 });
 
-function createTestConfig(overrides?: Partial<Owl07Config>): Owl07Config {
+function createTestConfig(overrides?: Partial<McpSyncConfig>): McpSyncConfig {
   return {
     mcpServers: {
       filesystem: {
